@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net471;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <Version>5.8.1</Version>
+    <AssemblyName>Magenic.Maqs.BasePowerShellTest</AssemblyName>
+    <RootNamespace>Magenic.Maqs.BasePowerShellTest</RootNamespace>
+    <PackageId>Magenic.Maqs.BasePowerShellTest</PackageId>
+    <Authors>Magenic.Maqs.BasePowerShellTest</Authors>
+    <Company>Magenic</Company>
+    <Product>Magenic.Maqs.BasePowerShellTest</Product>
+    <ApplicationIcon>MAQS.ico</ApplicationIcon>
+    <ProjectGuid>{2B6A350C-9305-4D3C-8A06-21C4E5A5B70F}</ProjectGuid>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>Magenic</Authors>
+    <Description>PowerShell extension for Magenic's automation quick start framework</Description>
+    <Copyright>Copyright © Magenic 2020</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>http://magenicautomation.azurewebsites.net/content/favicon.ico</PackageIconUrl>
+    <PackageIcon>MAQS.jpg</PackageIcon>
+    <PackageProjectUrl>https://github.com/Magenic/MAQS</PackageProjectUrl>
+    <PackageTags></PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReleaseNotes>6.0.0 - 2020-??-??</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\MAQS.jpg" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PowerShellStandard.Library" Version="5.1.0" />
+    <PackageReference Include="Polly" Version="7.2.1" />  
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\BaseTest\BaseTest.csproj" />
+  </ItemGroup>
+
+</Project>

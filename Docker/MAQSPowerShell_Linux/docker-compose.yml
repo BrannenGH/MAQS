@@ -1,0 +1,13 @@
+version: '2.1'
+
+services:
+  powershell-latest:
+    image: mcr.microsoft.com/powershell:latest
+    volumes:
+      - .:/mnt/host/
+      - ./sshd_config:/etc/ssh/sshd_config
+      - ./AuthorizedKeys/docker_linux.rsa.pub:/root/.ssh/authorized_keys
+    user: root
+    ports:
+      - "2200:22"
+    command: ['/mnt/host/WaitForConnections.ps1']

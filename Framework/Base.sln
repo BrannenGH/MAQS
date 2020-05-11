@@ -54,6 +54,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompositeUnitTests", "Compo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseCompositeTest", "BaseCompositeTest\BaseCompositeTest.csproj", "{D99B90EC-1065-41AD-891B-21649AB1EE2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerShellUnitTests", "PowerShellUnitTests\PowerShellUnitTests.csproj", "{9697F49E-8515-4A2B-9C49-5567620D7EBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasePowerShellTest", "BasePowerShellTest\BasePowerShellTest.csproj", "{2B6A350C-9305-4D3C-8A06-21C4E5A5B70F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -140,6 +144,14 @@ Global
 		{D99B90EC-1065-41AD-891B-21649AB1EE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D99B90EC-1065-41AD-891B-21649AB1EE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D99B90EC-1065-41AD-891B-21649AB1EE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9697F49E-8515-4A2B-9C49-5567620D7EBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9697F49E-8515-4A2B-9C49-5567620D7EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9697F49E-8515-4A2B-9C49-5567620D7EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9697F49E-8515-4A2B-9C49-5567620D7EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B6A350C-9305-4D3C-8A06-21C4E5A5B70F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B6A350C-9305-4D3C-8A06-21C4E5A5B70F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B6A350C-9305-4D3C-8A06-21C4E5A5B70F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B6A350C-9305-4D3C-8A06-21C4E5A5B70F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
