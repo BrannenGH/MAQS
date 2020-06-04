@@ -66,5 +66,10 @@ namespace Magenic.Maqs.Utilities.Helper
         /// String for Appium type test category
         /// </summary>
         public const string Appium = "Appium Unit Tests";
+
+        /// <summary>
+        /// String for PowerShell type test category
+        /// </summary>
+        public const string PowerShell = "PowerShell Unit Tests";
     }
 }

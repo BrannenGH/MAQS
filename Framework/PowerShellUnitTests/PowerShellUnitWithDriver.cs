@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Magenic.Maqs.BasePowerShellTest;
+using Magenic.Maqs.Utilities.Helper;
 using System.Collections.Generic;
 using System;
 using System.Management.Automation;
@@ -18,8 +19,10 @@ namespace PowerShellUnitTests
     public class PowerShellUnitWithDriver: BasePowerShellTest
     {
         [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
         public virtual void DriverConfiguredProperly()
         {
+            Assert.AreEqual(ConnectionTypeEnum.Local, PowerShellDriver.ConnectionType, "Driver is not configured properly.");
         }
 
         private static IEnumerable<object[]> CommandStreamMapping => new object[][]
@@ -57,6 +60,7 @@ namespace PowerShellUnitTests
         };
 
         [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
         public virtual void DebugStreamConfiguredProperly() 
         {
             Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
@@ -67,6 +71,7 @@ namespace PowerShellUnitTests
         }
 
         [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
         public virtual void VerboseStreamConfiguredProperly() 
         {
             Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
@@ -77,6 +82,7 @@ namespace PowerShellUnitTests
         }
 
         [DataTestMethod]
+        [TestCategory(TestCategories.PowerShell)]
         [DynamicData(nameof(CommandStreamMapping), DynamicDataSourceType.Property)]
         public virtual void AllStreamsEnabled(string command, Func<PowerShellDriver, string> getLastMessageFromStream)
         {
@@ -92,6 +98,7 @@ namespace PowerShellUnitTests
         }
 
         [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
         public virtual void RunCommandReturnsResults()
         {
             Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
@@ -102,6 +109,7 @@ namespace PowerShellUnitTests
         }
 
         [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
         // This test won't run by default, WSMAN needs to be enabled and configured on the local machine.
         [Ignore]
         public virtual void CanRunMultipleCommandsInSession()
@@ -125,6 +133,7 @@ namespace PowerShellUnitTests
         }
 
         [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
         public virtual void TestTimeoutThrowsException()
         {
             Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
@@ -136,6 +145,7 @@ namespace PowerShellUnitTests
         }
 
         [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
         public virtual void RunScriptReturnsResults()
         {
             Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
@@ -151,6 +161,7 @@ namespace PowerShellUnitTests
         }
 
         [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
         public virtual void RunCommandsReturnsResults()
         {
             Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
