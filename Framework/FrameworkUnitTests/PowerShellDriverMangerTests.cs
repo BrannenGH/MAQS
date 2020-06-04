@@ -112,13 +112,13 @@ namespace PowerShellUnitTests
 
             var session = PowerShellDriver.StartRemoteSession("test");
             string homePath = PowerShellDriver.Invoke("(Get-Variable Home).Value").LastOrDefault()?.ToString();
-            PowerShellDriver.Invoke($"New-Item -ItemType Directory {Path.Join(homePath, filename.ToString())}", session);
-            PowerShellDriver.Invoke($"Set-Location {Path.Join(homePath, filename.ToString())}", session);
+            PowerShellDriver.Invoke($"New-Item -ItemType Directory {Path.Combine(homePath, filename.ToString())}", session);
+            PowerShellDriver.Invoke($"Set-Location {Path.Combine(homePath, filename.ToString())}", session);
             PSDataCollection<PSObject> result = PowerShellDriver.Invoke($"Get-Location", session);
 
             Assert.AreEqual(
                 // Windows to UNIX style paths
-                Path.Join(homePath, filename.ToString()).Replace("\\", "/"), 
+                Path.Combine(homePath, filename.ToString()).Replace("\\", "/"), 
                 result.LastOrDefault()?.ToString(),
                 "The sequence of commands did not execute successfully."
             );
