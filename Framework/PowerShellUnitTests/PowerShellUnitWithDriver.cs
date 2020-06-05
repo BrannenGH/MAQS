@@ -5,6 +5,7 @@ using Magenic.Maqs.BasePowerShellTest;
 using Magenic.Maqs.Utilities.Helper;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 using System.Management.Automation;
 using System.Net.Http;
 using System.IO;
@@ -97,6 +98,22 @@ namespace PowerShellUnitTests
             Assert.AreEqual(testString, message, $"Failed to get stream for command {command}");
         }
 
+        [DataTestMethod]
+        [TestCategory(TestCategories.PowerShell)]
+        [DynamicData(nameof(CommandStreamMapping), DynamicDataSourceType.Property)]
+        public virtual async Task AllStreamsEnabledAsync(string command, Func<PowerShellDriver, string> getLastMessageFromStream)
+        {
+            Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
+
+            var testString = "I love .NET";
+
+            await PowerShellDriver.InvokeAsync(command + " \"" + testString + "\"");
+
+            var message = getLastMessageFromStream(PowerShellDriver);
+
+            Assert.AreEqual(testString, message, $"Failed to get stream for command {command}");
+        }
+
         [TestMethod]
         [TestCategory(TestCategories.PowerShell)]
         public virtual void RunCommandReturnsResults()
@@ -104,6 +121,17 @@ namespace PowerShellUnitTests
             Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
 
             var res = PowerShellDriver.Invoke("Get-Process");
+
+            Assert.AreNotEqual(0, res.Count, "Get-Process returned no results.");
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
+        public virtual async Task RunCommandReturnsResultsAsync()
+        {
+            Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
+
+            var res = await PowerShellDriver.InvokeAsync("Get-Process");
 
             Assert.AreNotEqual(0, res.Count, "Get-Process returned no results.");
         }
@@ -146,11 +174,39 @@ namespace PowerShellUnitTests
 
         [TestMethod]
         [TestCategory(TestCategories.PowerShell)]
+        public virtual async Task TestTimeoutThrowsExceptionAsync()
+        {
+            Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
+
+            await Assert.ThrowsExceptionAsync<PowerShellInvocationException>(
+                async () => await PowerShellDriver.InvokeAsync("Start-Sleep -Seconds 100000"),
+                "Timeout did not throw an exception."
+            );
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
         public virtual void RunScriptReturnsResults()
         {
             Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
 
             var res = PowerShellDriver.InvokeScript(@".\TestPowerShellScript.ps1");
+
+            Assert.AreNotEqual(res.Count, 0, "Script returned no results.");
+            Assert.AreEqual(
+                "http://localhost./",
+                (res.FirstOrDefault()?.Properties["BaseAddress"].Value).ToString(),
+                "Script returned incorrect base object."
+            );
+        }
+
+        [TestMethod]
+        [TestCategory(TestCategories.PowerShell)]
+        public virtual async Task RunScriptReturnsResultsAsync()
+        {
+            Assert.IsTrue(PowerShellDriver.TestConnection(), "Could not connect to PowerShell.");
+
+            var res = await PowerShellDriver.InvokeScriptAsync(@".\TestPowerShellScript.ps1");
 
             Assert.AreNotEqual(res.Count, 0, "Script returned no results.");
             Assert.AreEqual(
